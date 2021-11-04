@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おみくじ練習</title>
+</head>
+
+<body>
+  <script>
+    // ここに処理を追加
+    // 0から4までのどれかが表示される！
+    const randomNumber = Math.floor(Math.random() * 5);
+    let omikuji = "おみくじ";
+    if (randomNumber == 0) {
+      omikuji = "大吉";
+    }
+    else if (randomNumber == 1) {
+      omikuji = "吉";
+    }
+    else if (randomNumber == 2) {
+      omikuji = "中吉";
+    }
+    else if (randomNumber == 3) {
+      omikuji = "小吉";
+    }
+    else if (randomNumber == 4) {
+      omikuji = "凶凶";
+    }
+
+
+    alert(omikuji);
+
+  </script>
+</body>
+
+</html>

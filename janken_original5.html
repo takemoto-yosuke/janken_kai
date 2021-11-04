@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/sample2.css">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <div class="jankenman">
+    <header>
+      <div>
+        <img src="img\jankenman.png">
+        <div class="num">
+          <img id="num20" src="img\20.png">
+          <img id="num1" src="img\1.png">
+          <img id="num2" src="img\2.png">
+          <img id="num4" src="img\4.png">
+          <img id="num7" src="img\7.png">
+          <img id="num4_2" src="img\4ue.png">
+          <img id="num1_2" src="img\1migiue.png">
+          <img id="num2_2" src="img\2migiue.png">
+          <img id="num7_2" src="img\7migi.png">
+          <img id="num4_3" src="img\4migisita.png">
+          <img id="num2_3" src="img\2migisita.png">
+        </div>
+      </div>
+      <div class="jankenman2">
+        <img src="img\jankenman2.png">
+        <div class="hand_btn">
+          <img id="gu_btn" src="img\goo_btn.png">
+          <img id="cho_btn" src="img\chi_btn.png">
+          <img id="par_btn" src="img\pa_btn.png">
+          <img id="first_btn" src="img\coin.png">
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="hand">
+        <img id="com_hand" src="img\goo.png">
+      </div>
+    </main>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    //ここに処理を追加
+    //初期表示（0.5秒ごとにランダム）
+
+    var timer1 = 0;
+    var defo_flag = 1;
+    var aiko_flag = 0;
+    var wait_flag = 0;
+    var coin_flag = 0;
+    var aiko_continu_flag = 1;
+    var tm1 = null;
+    var com_hand = "最初はグー";
+    let img = document.getElementById("com_hand");
+
+    //「ジャンケン」音声オブジェクト
+    var music_janken = new Audio('music/janken_audio.mp3');
+    //「ポン」音声オブジェクト
+    var music_pon = new Audio('music/pon_audio.mp3');
+    //「あいこ」音声オブジェクト
+    var music_aiko = new Audio('music/aiko_audio.mp3');
+    //「勝ち」音声オブジェクト
+    var music_win = new Audio('music/win_audio.mp3');
+    //「負け」音声オブジェクト
+    var music_lose = new Audio('music/lose_audio.mp3');
+    //「ショ」音声オブジェクト
+    var music_syo = new Audio('music/syo_audio.mp3');
+
+    $(function () {
+      hide();
+      defo();
+      //メダル投入
+      $("#first_btn").on("click", function () {
+
+        if (wait_flag == 1) {
+          music_janken.play();
+          first_janken();
+        }
+      });
+
+      $("#gu_btn,#cho_btn,#par_btn").on("click", function () {
+        if (aiko_continu_flag == 0) {
+        }
+        else if (coin_flag == 1) {
+          music_janken.pause();
+          music_janken.currentTime = 0;
+          music_aiko.pause();
+          music_aiko.currentTime = 0;
+          defo_flag = 0;
+          com_janken();
+          const id_name = $(this).attr("id");
+          let my_hand = "最初はグー";
+          if (id_name == "gu_btn") {
+            my_hand = "グー";
+          }
+          else if (id_name == "cho_btn") {
+            my_hand = "チョキ";
+          }
+          else if (id_name == "par_btn") {
+            my_hand = "パー";
+          }
+
+          if (my_hand == com_hand) {
+            aiko_continu_flag = 0;
+            aiko();
+            aiko_flag = 1;
+          }
+          else if (((my_hand == "グー") && (com_hand == "チョキ")) || ((my_hand == "チョキ") && (com_hand == "パー")) || ((my_hand == "パー") && (com_hand == "グー"))) {
+            win();
+            defo();
+          }
+          else if (((my_hand == "グー") && (com_hand == "パー")) || ((my_hand == "チョキ") && (com_hand == "グー")) || ((my_hand == "パー") && (com_hand == "チョキ"))) {
+            lose();
+            defo();
+          }
+        }
+      });
+    });
+
+    function aiko() {
+      setTimeout(function () {
+        music_aiko.play();
+      }, 500);
+      setTimeout(function () {
+        first_janken();
+        aiko_continu_flag = 1;
+      }, 500);
+    }
+
+    function win() {
+      setTimeout(function () {
+        music_win.play();
+      }, 300);
+      aiko_flag = 0;
+      wait_flag = 0;
+      coin_flag = 0;
+      setTimeout(function () {
+        $('#num20').show();
+      }, 4000);
+    }
+
+    function lose() {
+      setTimeout(function () {
+        music_lose.play();
+      }, 300);
+      aiko_flag = 0;
+      wait_flag = 0;
+      coin_flag = 0;
+    }
+
+    //コイン投入関数
+    function first_janken() {
+      coin_flag = 1;
+      wait_flag = 0;
+      //初期表示（0.5秒ごとにランダム）ストップ
+      clearInterval(timer1);
+      tm1 = setInterval(function () {
+        const randomNumber2 = Math.floor(Math.random() * 3);
+        if (randomNumber2 == 0) {
+          img.src = "img/goo.png";
+          com_hand = "グー";
+        }
+        else if (randomNumber2 == 1) {
+          img.src = "img/chi.png";
+          com_hand = "パー";
+        }
+        else if (randomNumber2 == 2) {
+          img.src = "img/pa.png";
+          com_hand = "チョキ";
+        }
+      }, 10);
+    }
+
+    //コンピュータの手出し関数
+    function com_janken() {
+      //「ジャンケン」音声再生
+      if (aiko_flag == 0) {
+        music_pon.play();
+      }
+      else {
+        music_syo.play();
+      }
+      clearInterval(tm1);
+      console.log(com_hand);
+      if (com_hand == "グー") {
+        img.src = "img/goo.png";
+      }
+      else if (com_hand == "チョキ") {
+        img.src = "img/chi.png";
+      }
+      else if (com_hand == "パー") {
+        img.src = "img/pa.png";
+      }
+    }
+
+    //初期表示（0.5秒ごとにランダム）関数
+    function defo() {
+      setTimeout(function () {
+        timer1 = setInterval(function () {
+          const randomNumber2 = Math.floor(Math.random() * 3);
+          let img = document.getElementById("com_hand");
+          if (randomNumber2 == 0) {
+            img.src = "img/goo.png";
+          }
+          else if (randomNumber2 == 1) {
+            img.src = "img/chi.png";
+          }
+          else if (randomNumber2 == 2) {
+            img.src = "img/pa.png";
+          }
+        }, 500);
+        wait_flag = 1;
+      }, 1000);
+    }
+
+    function hide() {
+      $('#num20').hide();
+      $('#num1').hide();
+      $('#num2').hide();
+      $('#num4').hide();
+      $('#num7').hide();
+      $('#num4_2').hide();
+      $('#num1_2').hide();
+      $('#num2_2').hide();
+      $('#num7_2').hide();
+      $('#num4_3').hide();
+      $('#num2_3').hide();
+    }
+  </script>
+
+
+</body>
+
+</html>

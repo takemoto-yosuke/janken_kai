@@ -1,0 +1,139 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:left;
+    font-size: 32px;
+}
+header{
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+
+}
+#num20 {
+    position: absolute;
+    margin-top: -114px;
+    margin-left: -61px;
+}
+#num1 {
+    position: absolute;
+    margin-top: -156px;
+    margin-left: -171px;
+}
+#num2 {
+    position: absolute;
+    margin-top: -226px;
+    margin-left: -225px;
+}
+#num4 {
+    position: absolute;
+    margin-top: -330px;
+    margin-left: -227px;
+}
+#num7 {
+    position: absolute;
+    margin-top: -432px;
+    margin-left: -221px;
+}
+#num4_2 {
+    position: absolute;
+    margin-top: -494px;
+    margin-left: -62px;
+}
+#num1_2 {
+    position: absolute;
+    margin-top: -488px;
+    margin-left: 46px;
+}
+#num2_2 {
+    position: absolute;
+    margin-top: -427px;
+    margin-left: 126px;
+}
+#num7_2 {
+    position: absolute;
+    margin-top: -331px;
+    margin-left: 157px;
+}
+#num4_3 {
+    position: absolute;
+    margin-top: -231px;
+    margin-left: 126px;
+}
+#num2_3 {
+    position: absolute;
+    margin-top: -159px;
+    margin-left: 40px;
+}
+
+#first_btn {
+    cursor: url("../img/cursor.png"),auto;  
+}
+#gogo_0 {
+    width: 140px;
+}
+#gogo_1 {
+    width: 140px;
+}
+.jankenman2 {
+    position: relative;
+    width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hand {
+    position: absolute;
+    align-items: center;
+    top: 280px;
+}
+.hand_btn {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-top: -220px;
+    margin-left: 365px;
+}
+.gogo {
+    position: absolute;
+    margin-right: 680px;
+}
+.hand_btn img#first_btn {
+    margin-left: 70px;
+}
+main{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-bottom:1px solid #ccc;
+}
+footer{
+    background-color: #fff;
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+p{
+    font-size:200%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:200px;
+}
+ul{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+li{
+    text-align: center;
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+}
+li:hover{
+    background: #0066CC;
+    color:#fff;
+}
